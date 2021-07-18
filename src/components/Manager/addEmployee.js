@@ -2,12 +2,14 @@ import React,{useState} from 'react';
 import { connect } from 'react-redux';
 import { addSalesExecutive } from '../../actions/index';
 import styles from "./addEmp.module.css";
+import { useHistory } from 'react-router-dom';
 const AddEmployee=({ add_executive_to_team })=>{
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [dob, setDob] = useState('')
     const [gender, setGender] = useState('')
     const [experience, setExperience] = useState(0)
+    const history=useHistory();
     const handleFormSubmit = (e) => {
         const executiveDetails = { firstName: firstName, lastName: lastName, dob: dob, gender: gender, experience: experience, salesExecutiveId: Math.floor((Math.random() * 100000000) + 1) }
         e.preventDefault();
@@ -22,6 +24,7 @@ const AddEmployee=({ add_executive_to_team })=>{
         var empList = JSON.parse(localStorage.getItem('empList')) || [];
         empList.push(executiveDetails);
         localStorage.setItem('empList', JSON.stringify(empList));
+        history.push("/admin/view_team");
     }
 
     return(
@@ -53,7 +56,7 @@ const AddEmployee=({ add_executive_to_team })=>{
             </div>
             <div className={styles.row}>
                  <label >Experience</label>
-                 <input type="number" required placeholder="Experience"  onChange={(e)=>{setExperience(e.target.value)}}  />
+                 <input type="number" min="0" required placeholder="Experience"  onChange={(e)=>{setExperience(e.target.value)}}  />
             </div>
             <div id="button" className={styles.row}>
                 <button type="submit">Add Executive</button>

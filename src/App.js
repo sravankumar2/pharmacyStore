@@ -23,7 +23,7 @@ import SalesHome from "./components/SalesExecutive"
 import Landing from './components/Landing';
 
 function App({ adminLogin, loginStatus, salesLogin }) {
-  console.log(adminLogin)
+  // console.log(adminLogin)
   return (
     <div className="App">
     <Router>
